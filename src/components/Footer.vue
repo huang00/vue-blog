@@ -1,7 +1,6 @@
 <template>
   <footer>
-    <p>Design by DanceSmile
-      <a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备17012175号-1</a> 
+    <p>Design by DanceSmile<a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备17012175号-1</a>
       <a href="/">网站统计</a>
     </p>
   </footer>
@@ -15,4 +14,3 @@
     margin: auto;
   }
 </style>
-
