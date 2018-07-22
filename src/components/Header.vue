@@ -49,7 +49,7 @@ export default {
         .nav {
             width: 45%;
             padding: 0 15px;
-            a { 
+            a {
                 color: black;
                 position: relative;
                 display: inline-block;
@@ -61,7 +61,7 @@ export default {
                     font: 12px Georgia, serif;
                     top: 25px;
                     transition: all 0.3s;
-                    text-align: center; 
+                    text-align: center;
                     width: 100%;
                     opacity: 0;
                 }
