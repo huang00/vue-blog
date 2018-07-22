@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <app-header></app-header>
+    <app-header :currLocation="'about'"></app-header>
     <h1>{{ msg }}</h1>
   </div>
 </template>

@@ -1,21 +1,24 @@
 <template>
   <div class="index">
-    <app-header></app-header>
+    <app-header :currLocation="'index'"></app-header>
     <div class="banner"></div>
+    <main></main>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/Header'
+import AppFooter from '@/components/Footer'
 
 export default {
   name: 'index',
   components: {
-    AppHeader
+    AppHeader,
+    AppFooter
   },
   data () {
     return {
-      msg: 'Welcome to Your index.js App',
       value: [20, 50]
     }
   }
@@ -29,7 +32,10 @@ export default {
       height: 265px;
       background: url('../assets/img/banner_top.jpg') no-repeat;
       background-size: 120% 100%;
-      background-position: -82px;
+      background-position: -153px;
+    }
+    main {
+      height: 500px;
     }
   }
 </style>

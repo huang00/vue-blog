@@ -2,8 +2,8 @@ import publicRouter from '@/router'
 
 const home = {
   path: '/',
-  name: 'HelloWorld',
-  component: () => import('../components/HelloWorld')
+  name: 'About',
+  component: () => import('../views/About')
 }
 
 export const routes = [ home ].concat(publicRouter)
