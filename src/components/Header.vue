@@ -40,10 +40,13 @@ export default {
         .inline { float: left; height: 60px; }
         .logo {
             width: 55%;
-            img {
-                display: block;
-                width: 260px;
-                margin-left: 150px;
+            a {
+                display: inline-block;
+                margin-left: 260px;
+                img {
+                    display: block;
+                    width: 260px;
+                }
             }
         }
         .nav {
