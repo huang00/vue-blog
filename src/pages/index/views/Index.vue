@@ -4,7 +4,7 @@
     <div class="banner"></div>
     <main>
       <template>
-        <Table :columns="columns1" :data="data1"></Table>
+        <Table ref="tableEmpty" id="tableEmpty" :columns="columns1" :data="data1" no-data-text="暂时无数据"></Table>
       </template>
     </main>
     <app-footer></app-footer>
@@ -66,38 +66,24 @@ export default {
           key: 'address'
         }
       ],
-      data1: [
-        {
-          name: 'John Brown',
-          age: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
-        },
-        {
-          name: 'Jim Green',
-          age: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
-        },
-        {
-          name: 'Joe Black',
-          age: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        }
-      ]
+      data1: []
     }
   },
   methods: {
     parentHandlerChange(value) {
       console.log('value, ', value)
+    },
+    emptyTable () {
+      this.$nextTick(() => {
+        let table = document.getElementById('tableEmpty')
+        let tableDody = table.getElementsByClassName('ivu-table-tip')[0]
+        tableDody.innerHTML = `<div class="empty"></div>`
+      })
+      
     }
+  },
+  mounted () {
+    this.emptyTable()
   }
 }
 </script>
