@@ -8,8 +8,12 @@
       </template>
       <DatePicker type="date" ref="datePicker" @on-open-change="open" placeholder="Select date" :options="options" style="width: 200px"></DatePicker>
       <hr style="margin: 20px 0;">
-      <app-modal v-model="modal1" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
-        <h1 slot="header">我是插槽</h1>
+      <app-modal 
+        v-model="modal1"
+        :title="'我是title'"
+        :width="600"
+        @on-ok="ok" @on-cancel="cancel" 
+        @on-visible-change="change">
       </app-modal>
       <button @click="modal1 = !modal1">modal1</button>
     </main>

@@ -1,10 +1,10 @@
 <template>
   <div class="modal-backdrop" v-if="visible">
     <input type="text" :value="value" style="display: none;">
-    <div class="modal">
-      <div class="modal-header">
+    <div class="modal" :style="{height: height+'px', width: width+'px'}">
+      <div class="modal-header" v-if="showHeader">
         <slot name="header">
-          <h5>header</h5>
+          {{ title }}
         </slot>
         <span @click="close" class="close">X</span>
       </div>
@@ -13,7 +13,7 @@
           <h1>body</h1>
         </slot>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" v-if="showFooter">
         <slot name="footer">
           <button @click="confirm">confirm</button>
           <button @click="cancel">cancel</button>
@@ -30,6 +30,26 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
+    showFooter: {
+      type: Boolean,
+      default: true
+    },
+    title: {
+      type: String,
+      default: 'title'
+    },
+    width: {
+      type: Number,
+      default: 500
+    },
+    height: {
+      type: Number,
+      default: 300
     }
   },
   data () {
@@ -46,6 +66,7 @@ export default {
     },
     cancel () {
       this.$emit('on-cancel')
+      this.visible = false
     }
   },
   watch: {
@@ -69,10 +90,8 @@ export default {
     background-color: rgba(55,55,55,.6);
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 100;
     .modal {
-      width: 500px;
-      height: 300px;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -91,6 +110,26 @@ export default {
         text-align: center;
         line-height: 20px;
         cursor: pointer;
+      }
+      .modal-header {
+        line-height: 30px;
+        background: #ccc;
+      }
+      .modal-footer {
+        border-top: 1px solid #ccc;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 15px 0;
+        button {
+          border: 0;
+          width: 70px;
+          line-height: 30px;
+          cursor: pointer;
+          outline: none; 
+        }
       }
     }
   }
