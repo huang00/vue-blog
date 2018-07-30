@@ -6,6 +6,12 @@
       <template>
         <Table ref="tableEmpty" id="tableEmpty" :columns="columns1" :data="data1" no-data-text="暂时无数据"></Table>
       </template>
+      <DatePicker type="date" ref="datePicker" @on-open-change="open" placeholder="Select date" :options="options" style="width: 200px"></DatePicker>
+      <hr style="margin: 20px 0;">
+      <app-modal v-model="modal1" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
+        <h1 slot="header">我是插槽</h1>
+      </app-modal>
+      <button @click="modal1 = !modal1">modal1</button>
     </main>
     <app-footer></app-footer>
   </div>
@@ -14,12 +20,14 @@
 <script>
 import AppHeader from '@/components/Header'
 import AppFooter from '@/components/Footer'
+import AppModal from '../components/AppModal'
 
 export default {
   name: 'index',
   components: {
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppModal
   },
   data () {
     const vm = this
@@ -66,12 +74,28 @@ export default {
           key: 'address'
         }
       ],
-      data1: []
+      data1: [],
+      options: {
+        disabledDate (data) {},
+        shortcuts: [{
+          text: '记住',
+          value (data) {
+            return new Date('2018-07-29')
+          },
+          // onClick () {
+          //   console.log('click')
+          // }
+        }]
+      },
+      modal1: false
     }
   },
   methods: {
     parentHandlerChange(value) {
       console.log('value, ', value)
+    },
+    open (boo) {
+      console.log(this.$refs.datePicker)
     },
     emptyTable () {
       this.$nextTick(() => {
@@ -80,6 +104,15 @@ export default {
         tableDody.innerHTML = `<div class="empty"></div>`
       })
       
+    },
+    ok () {
+      console.log('你点击了确认')
+    },
+    cancel () {
+      console.log('你点击了取消')
+    },
+    change (val) {
+      console.log(val)
     }
   },
   mounted () {
