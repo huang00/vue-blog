@@ -26,6 +26,8 @@
     </template>
     <br style="margin: 20px 0;">
     <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
+    <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
+    <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
     <br style="margin: 20px 0;">
     <div style="border: 1px solid red;" v-html="itemHTML()">
       <!-- <div class="group" v-for="(item, index) in list" :key="index">

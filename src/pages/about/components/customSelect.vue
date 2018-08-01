@@ -100,6 +100,7 @@ export default {
       border: 1px solid #E2E2E2;
       background-color: white;
       margin-top: 3px;
+      z-index: 10;
       li {
         .group-item {
           padding: 7px 0;
