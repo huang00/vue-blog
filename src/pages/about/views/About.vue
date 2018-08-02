@@ -35,7 +35,7 @@
     <br style="margin: 20px 0;">
     <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
     <hr style="margin: 20px 0;">
-    <Loading :show="show"></Loading>
+    <Loading :show="show" :end="end"></Loading>
   </div>
 </template>
 
@@ -61,10 +61,17 @@ export default {
       msg: 'Welcome to about',
       model9: 'London',
       value: '3',
-      show: true
+      show: false,
+      end: false
     }
   },
-  methods: { }
+  methods: { },
+  created () {
+    setTimeout(() => {
+      console.log('end----about------')
+      this.end = false
+    }, 5000)
+  }
 }
 </script>
 

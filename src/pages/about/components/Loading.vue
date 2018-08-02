@@ -16,7 +16,11 @@ export default {
     show: { default: false }
   },
   data () {
-    return { }
+    return {
+      start: 0,
+      percent: 2,
+      timer: 0
+    }
   },
   methods: {
     drawMain (drawing_elem, percent, forecolor, bgcolor, start) {
@@ -80,22 +84,46 @@ export default {
           if(start >= percent) return;
           start += 1;
       }());
+    },
+    drawStart () {
+      this.$nextTick(() => {
+        let myCanvas = this.$refs.loadingCanvas
+        this.drawMain(myCanvas, this.percent, "#85d824", "#eef7e4", this.start)
+        this.timer = setInterval(() => {
+          this.percent += 2
+          this.drawMain(myCanvas, this.percent, "#85d824", "#eef7e4", this.start)
+          this.start = this.percent
+          if (this.percent >= 90) {
+            clearInterval(this.timer)
+          }
+        }, 800)
+      })
+    },
+    end () {
+      clearInterval(this.timer)
+      let myCanvas = this.$refs.loadingCanvas
+      this.drawMain(myCanvas, 100, "#85d824", "#eef7e4", this.percent)
     }
   },
   mounted () {
-    let myCanvas = this.$refs.loadingCanvas
-    this.drawMain(myCanvas, 30, "#85d824", "#eef7e4", 0);
+    if (this.show) {
+      this.drawStart()
+    }
+    setTimeout(() => {
+      console.log('end000000000')
+      this.end()
+    }, 5000)
   },
   watch: {
     show (val) {
+      this.start = 0
+      this.percent = 0
       if (val) {
         this.$nextTick(() => {
-          let myCanvas = this.$refs.loadingCanvas
-          setTimeout(() => {
-            this.drawMain(myCanvas, 30, "#85d824", "#eef7e4", 0)
-          }, 300)
+          this.drawStart()
         })
-        
+      } else {
+        clearInterval(this.timer)
       }
     }
   }
