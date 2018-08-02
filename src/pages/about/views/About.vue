@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <app-header :currLocation="'about'"></app-header>
-    <h1>{{ msg }}</h1>
+    <h1 @click="show = !show" style="margin-top: 500px;">{{ msg }}</h1>
     <template>
       <Select v-model="model9" style="width:200px" class="product-select">
           <Option value="New York" label="New York">
@@ -23,41 +23,33 @@
               </div>
           </Option>
       </Select>
+      <Select v-model="model9" style="width:200px" class="product-select">
+          <Option value="New York" label="New York">
+            <div class="item-li">
+              <span class="room-status">预</span>
+              <span style="margin-left: 10px;">大床房&lt;含早&gt;</span>
+            </div>
+          </Option>
+      </Select>
     </template>
     <br style="margin: 20px 0;">
     <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
-    <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
-    <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
-    <br style="margin: 20px 0;">
-    <div style="border: 1px solid red;" v-html="itemHTML()">
-      <!-- <div class="group" v-for="(item, index) in list" :key="index">
-        <div class="item">
-          <span></span>
-        </div>
-      </div> -->
-      <!-- <div class="group">
-        <div class="item">
-          <span></span>
-        </div>
-      </div>
-      <div class="group">
-        <div class="item">
-          <span></span>
-        </div>
-      </div> -->
-    </div>
+    <hr style="margin: 20px 0;">
+    <Loading :show="show"></Loading>
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/Header'
 import customSelect from '../components/customSelect'
+import Loading from '../components/Loading'
 
 export default {
   name: 'about',
   components: {
     AppHeader,
-    customSelect
+    customSelect,
+    Loading
   },
   data () {
     return {
@@ -69,51 +61,10 @@ export default {
       msg: 'Welcome to about',
       model9: 'London',
       value: '3',
-      list: [
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'},
-        {name: 'sdsfsf'}
-      ]
+      show: true
     }
   },
-  methods: {
-    itemHTML () {
-      let html = '',
-          integer = 0,
-          list = this.list;
-      let len = 12, n = 0,
-          col = /^\d+$/.test(len / 5) ? len / 5 + 1 : Math.ceil(len / 5);
-      
-      for (let i = 0; i < len; i++) {
-        integer = i % 5
-        n = Math.ceil((i + 1) / 5)
-        if (!integer && n !== col) {
-          html += '<div class="group">'
-        } else if (!integer && n === col) {
-          html += '<div class="group col">'
-        }
-        html += '<div class="item"><span></span></div>'
-        if (integer === 4 || integer === len - 1) {
-          html += '</div>'
-        }
-      }
-      return html
-
-    }
-  },
-  watch: {
-    value (val) {
-      console.log('value = ', val)
-    }
-  }
+  methods: { }
 }
 </script>
 
@@ -126,10 +77,8 @@ export default {
       }
       .ivu-select-dropdown {
         border-radius: 0;
-        background: red !important;
         .ivu-select-dropdown-list {
           .ivu-select-item {
-            // border-bottom: 1px solid #E6E6E6;
             padding-bottom: 0;
             padding-top: 0;
             .item-li {
