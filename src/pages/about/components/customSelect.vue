@@ -1,5 +1,5 @@
 <template>
-  <div :class="open?'custom-select':'custom-select open'" @click.stop="open = !open">
+  <div :class="open?'custom-select':'custom-select open'" @click="open = true">
     <div class="select-selection">
       <input type="hidden" :value="value">
       <div>
@@ -46,15 +46,27 @@ export default {
           this.label = list[i].label
         }
       }
+    },
+    close (e) {
+      e = e || window.event
+      this.open =  false
+      return false
     }
   },
   watch: {
     selected (val) {
       this.$emit('input', val)
+    },
+    open (val) {
+      let that = this
+      if (val) {
+        document.addEventListener('click', that.close)
+      } else {
+        document.removeEventListener('click', that.close)
+      }
     }
   },
   mounted () {
-    const that = this
     this.selected = this.value
     if (this.value) {
       this.getLabel(this.value)
@@ -64,11 +76,6 @@ export default {
         this.selected = this.data[0].id
       }
     }
-    document.addEventListener('click', function(e) {
-      e = e || window.event
-      that.open =  false
-      return false
-    })
   }
 }
 </script>

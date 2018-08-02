@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <app-header :currLocation="'about'"></app-header>
-    <h1 @click="show = !show" style="margin-top: 500px;">{{ msg }}</h1>
+    <h1 @click="show = !show" style="margin-top: 200px;">{{ msg }}</h1>
     <template>
       <Select v-model="model9" style="width:200px" class="product-select">
           <Option value="New York" label="New York">
@@ -33,7 +33,12 @@
       </Select>
     </template>
     <br style="margin: 20px 0;">
-    <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
+    <div style="display: flex;">
+      <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
+      <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
+      <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
+    </div>
+    
     <hr style="margin: 20px 0;">
     <Loading :show="show" :end="end"></Loading>
   </div>
