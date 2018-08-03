@@ -13,7 +13,6 @@ export default {
 <style lang="scss">
   .empty {
     height: 50px;
-    background: url('./assets/img/banner_top.jpg') ;
+    background: url('./assets/img/banner_top.jpg');
   }
 </style>
-

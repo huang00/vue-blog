@@ -24,8 +24,13 @@
 export default {
   naem: 'custom-select',
   props: {
-    value: { default: ''},
-    data: { type: Array, default: []}
+    value: {default: ''},
+    data: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
   },
   data () {
     return {
@@ -47,9 +52,9 @@ export default {
         }
       }
     },
-    close (e) {
+    eventHandler (e) {
       e = e || window.event
-      this.open =  false
+      this.open = false
       return false
     }
   },
@@ -60,9 +65,9 @@ export default {
     open (val) {
       let that = this
       if (val) {
-        document.addEventListener('click', that.close)
+        document.addEventListener('click', that.eventHandler)
       } else {
-        document.removeEventListener('click', that.close)
+        document.removeEventListener('click', that.eventHandler)
       }
     }
   },
@@ -98,7 +103,7 @@ export default {
         right: 5px;
         top: 11px;
         transition: all .5s;
-        height: 8px; 
+        height: 8px;
       }
     }
     .select-dropdown {
@@ -135,4 +140,3 @@ export default {
     .icon { transform:rotate(180deg); }
   }
 </style>
-

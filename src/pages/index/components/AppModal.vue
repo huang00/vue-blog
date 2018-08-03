@@ -128,10 +128,9 @@ export default {
           width: 70px;
           line-height: 30px;
           cursor: pointer;
-          outline: none; 
+          outline: none;
         }
       }
     }
   }
 </style>
-

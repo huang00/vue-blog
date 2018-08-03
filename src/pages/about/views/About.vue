@@ -1,46 +1,24 @@
 <template>
   <div class="about">
     <app-header :currLocation="'about'"></app-header>
-    <h1 @click="show = !show" style="margin-top: 200px;">{{ msg }}</h1>
-    <template>
-      <Select v-model="model9" style="width:200px" class="product-select">
-          <Option value="New York" label="New York">
-            <div class="item-li">
-              <span class="room-status">预</span>
-              <span style="margin-left: 10px;">大床房&lt;含早&gt;</span>
-            </div>
-          </Option>
-          <Option value="London" label="London">
-              <div class="item-li">
-                <span class="room-status">预</span>
-                <span style="float:right;color:#ccc">America</span>
-              </div>
-          </Option>
-          <Option value="Sydney" label="Sydney">
-              <div class="item-li">
-                <span class="room-status">预</span>
-                <span style="float:right;color:#ccc">America</span>
-              </div>
-          </Option>
-      </Select>
-      <Select v-model="model9" style="width:200px" class="product-select">
-          <Option value="New York" label="New York">
-            <div class="item-li">
-              <span class="room-status">预</span>
-              <span style="margin-left: 10px;">大床房&lt;含早&gt;</span>
-            </div>
-          </Option>
-      </Select>
-    </template>
+    <h1 @click="show = !show">{{ msg }}</h1>
     <br style="margin: 20px 0;">
     <div style="display: flex;">
       <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
       <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
       <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
     </div>
-    
     <hr style="margin: 20px 0;">
     <Loading :show="show" :end="end"></Loading>
+    <div class="scrollView">
+      <div class="scrollGroup" ref="scrollGroup">
+        <ul ref="scrollContent">
+          <li>正在从携程获取信息...</li>
+          <li>正在从去哪儿获取信息...</li>
+          <li>正在从艺龙获取信息...</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -70,12 +48,28 @@ export default {
       end: false
     }
   },
-  methods: { },
-  created () {
-    setTimeout(() => {
-      console.log('end----about------')
-      this.end = false
-    }, 5000)
+  methods: {
+    scroll () {
+      let scrollGroup = this.$refs.scrollGroup
+      let scrollContent = this.$refs.scrollContent
+      let scrollContentClone = scrollContent.cloneNode(true)
+      let height = scrollContent.offsetHeight
+      scrollGroup.appendChild(scrollContentClone)
+      scrollGroup.scrollTop = 100
+      console.log('scrollTop', scrollGroup.scrollTop)
+      // setInterval(() => {
+      //   if (scrollGroup.scrollTop >= height) {
+      //     scrollGroup.scrollTop = 0
+      //   } else {
+      //     scrollGroup.scrollTop++
+      //   }
+      // }, 500)
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.scroll()
+    })
   }
 }
 </script>
@@ -83,35 +77,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   .about {
-    .product-select {
-      .ivu-select-selection {
-        border-radius: 0;
-      }
-      .ivu-select-dropdown {
-        border-radius: 0;
-        .ivu-select-dropdown-list {
-          .ivu-select-item {
-            padding-bottom: 0;
-            padding-top: 0;
-            .item-li {
-              border-bottom: 1px solid #E6E6E6;
-              padding: 8px 0;
-            }
-          }
-          .ivu-select-item:last-child { .item-li { border: 0; } }
-        }
-        .room-status {
-          display: inline-block;
-          width: 16px;
-          line-height: 16px;
-          background-color: green;
-          color: white;
-          text-align: center;
-          font-size: 10px;
-        }
-      }
-      
-    }
     .group {
       width: 100%;
       display: flex;
@@ -126,9 +91,23 @@ export default {
         }
       }
     }
-    .group.col { 
-      justify-content: flex-start; 
+    .group.col {
+      justify-content: flex-start;
       .item { width: 20%; }
+    }
+    .scrollView {
+      // position: relative;
+      width: 200px;
+      margin: 0 auto;
+      height: 40px;
+      .scrollGroup {
+        // position: absolute;
+        // top: 0;
+        height: 180px;
+        color: #000000;
+        font-size: 16px;
+        line-height: 30px;
+      }
     }
   }
 </style>

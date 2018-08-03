@@ -8,12 +8,9 @@
       </template>
       <DatePicker type="date" ref="datePicker" @on-open-change="open" placeholder="Select date" :options="options" style="width: 200px"></DatePicker>
       <hr style="margin: 20px 0;">
-      <app-modal 
-        v-model="modal1"
+      <app-modal v-model="modal1"
         :title="'我是title'"
-        :width="600"
-        @on-ok="ok" @on-cancel="cancel" 
-        @on-visible-change="change">
+        :width="600" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
       </app-modal>
       <button @click="modal1 = !modal1">modal1</button>
     </main>
@@ -43,26 +40,26 @@ export default {
           key: 'name',
           renderHeader (h) {
             return h({
-              template: '<Select v-model="model1" @on-change="handlerChange" style="width:100px">'+
-                        '<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>'+
+              template: '<Select v-model="model1" @on-change="handlerChange" style="width:100px">' +
+                        '<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>' +
                         '</Select>',
               data () {
                 return {
                   cityList: [
                     {
-                        value: 'New York',
-                        label: 'New York'
+                      value: 'New York',
+                      label: 'New York'
                     },
                     {
-                        value: 'London',
-                        label: 'London'
+                      value: 'London',
+                      label: 'London'
                     }
                   ],
                   model1: ''
                 }
               },
               methods: {
-                handlerChange(value) {
+                handlerChange (value) {
                   vm.parentHandlerChange(value)
                 }
               }
@@ -85,7 +82,7 @@ export default {
           text: '记住',
           value (data) {
             return new Date('2018-07-29')
-          },
+          }
           // onClick () {
           //   console.log('click')
           // }
@@ -95,7 +92,7 @@ export default {
     }
   },
   methods: {
-    parentHandlerChange(value) {
+    parentHandlerChange (value) {
       console.log('value, ', value)
     },
     open (boo) {
@@ -107,7 +104,6 @@ export default {
         let tableDody = table.getElementsByClassName('ivu-table-tip')[0]
         tableDody.innerHTML = `<div class="empty"></div>`
       })
-      
     },
     ok () {
       console.log('你点击了确认')
