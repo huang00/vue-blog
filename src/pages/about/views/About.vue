@@ -53,17 +53,29 @@ export default {
       let scrollGroup = this.$refs.scrollGroup
       let scrollContent = this.$refs.scrollContent
       let scrollContentClone = scrollContent.cloneNode(true)
-      let height = scrollContent.offsetHeight
       scrollGroup.appendChild(scrollContentClone)
-      scrollGroup.scrollTop = 100
-      console.log('scrollTop', scrollGroup.scrollTop)
-      // setInterval(() => {
-      //   if (scrollGroup.scrollTop >= height) {
-      //     scrollGroup.scrollTop = 0
+      let height = scrollContent.offsetHeight
+      let top = 0
+      setInterval(() => {
+        if (Math.abs(scrollGroup.style.top.slice(0, -2)) >= height) {
+          scrollGroup.style.top = 0
+          top = 0
+        } else {
+          scrollGroup.style.top = top + 'px'
+          top -= 2
+        }
+      }, 100)
+      // startScroll()
+      // function startScroll() {
+      //   window.requestAnimationFrame(startScroll)
+      //   if (Math.abs(scrollGroup.style.top.slice(0, -2)) >= height) {
+      //     scrollGroup.style.top = 0
+      //     top = 0
       //   } else {
-      //     scrollGroup.scrollTop++
+      //     scrollGroup.style.top = top + 'px'
+      //     top -= 1
       //   }
-      // }, 500)
+      // }
     }
   },
   mounted () {
@@ -96,14 +108,14 @@ export default {
       .item { width: 20%; }
     }
     .scrollView {
-      // position: relative;
+      position: relative;
       width: 200px;
       margin: 0 auto;
       height: 40px;
+      overflow: hidden;
       .scrollGroup {
-        // position: absolute;
-        // top: 0;
-        height: 180px;
+        position: absolute;
+        top: 0;
         color: #000000;
         font-size: 16px;
         line-height: 30px;
