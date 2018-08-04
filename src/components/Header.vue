@@ -21,13 +21,16 @@ export default {
     return {
       navList: [
         {txt: '首页', href: './index.html', active: 'index', en: 'Protal'},
-        {txt: '慢生活', href: 'javascript:;', active: '', en: 'Life'},
+        {txt: '慢生活', href: './live.html', active: 'live', en: 'Life'},
         {txt: '虽言碎语', href: 'javascript:;', active: '', en: 'Doing'},
         {txt: '模板分享', href: 'javascript:;', active: '', en: 'Share'},
         {txt: '学无止境', href: 'javascript:;', active: '', en: 'Learn'},
         {txt: '关于', href: './about.html', active: 'about', en: 'About'}
       ]
     }
+  },
+  created () {
+    console.log('currentLovation, ', this.currLocation)
   }
 }
 </script>

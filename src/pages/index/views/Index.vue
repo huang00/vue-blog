@@ -21,7 +21,7 @@
 <script>
 import AppHeader from '@/components/Header'
 import AppFooter from '@/components/Footer'
-import AppModal from '../components/AppModal'
+import AppModal from '@/components/AppModal'
 
 export default {
   name: 'index',
