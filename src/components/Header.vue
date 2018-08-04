@@ -28,9 +28,6 @@ export default {
         {txt: '关于', href: './about.html', active: 'about', en: 'About'}
       ]
     }
-  },
-  created () {
-    console.log('currentLovation, ', this.currLocation)
   }
 }
 </script>
