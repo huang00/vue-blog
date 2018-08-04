@@ -119,6 +119,7 @@ export default {
               line-height: 16px;
               text-align: center;
               margin-left: 5px;
+              color: white;
             }
             p { line-height: 19px; }
             .mark.today { background-color: #F51C1C; }
