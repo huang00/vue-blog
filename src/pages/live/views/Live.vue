@@ -57,6 +57,10 @@
           </div>
         </div>
       </div>
+      <div class="colorPicker">
+        <input type="color" v-model="color" style="display: none;" ref="colorPicker">
+        <div @click="selectColor" class="showColor" :style="{backgroundColor: color, height: '100%'}"></div>
+      </div>
     </main>
     <app-footer></app-footer>
   </div>
@@ -74,6 +78,7 @@ export default {
   },
   data () {
     return {
+      color: '#ccc',
       today: new Date(),
       festivalList: [
         { date: '1533830400000', name: '中秋' },
@@ -194,6 +199,11 @@ export default {
       date02 = this.dateFormat(date02)
       return date01 === date02
     },
+    selectColor () {
+      let colorPicker = this.$refs.colorPicker
+      colorPicker.click()
+      console.log('color, ', this.color)
+    },
     getData () {
       let datelist = []
       datelist.push({ date: +new Date(), remainRoom: 5 })
@@ -273,6 +283,11 @@ export default {
       .clearfix {
         li { float: left; }
       }
+    }
+    .colorPicker {
+      height: 40px;
+      width: 100px;
+      border-radius: 10px;
     }
   }
 }

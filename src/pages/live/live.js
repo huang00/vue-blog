@@ -6,6 +6,7 @@ import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import '@/assets/css/common.css'
+import 'babel-polyfill'
 
 Vue.config.productionTip = false
 Vue.use(iView)
