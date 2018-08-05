@@ -29,7 +29,7 @@
           </div>
           <div class="body">
             <ul class="clearfix" v-for="(item, index) in data.roomTypeList" :key="index">
-              <li class="grid row1 column0 title" :class="['grid', 'column0', 'title', 'row' + (index+1)]">{{ item.name }}</li>
+              <li :class="['grid', 'column0', 'title', 'row' + (index+1)]">{{ item.name }}</li>
               <li @click="singleOperation(subItem, item.id)" :class="['grid', 'row' + (index+1), 'column' + (key+1), subItem.remainRoom?'':'remainNot']" v-for="(subItem, key) in item.roomAmount" :key="key">
                 <span class="num" v-if="subItem.status === 0">{{ subItem.remainRoom }}</span>
                 <span class="stop" v-if="subItem.status === 1">停售</span>
@@ -109,7 +109,29 @@ export default {
   methods: {
     batchOperation (item) {
       /* 批量操作 */
-      console.log('item', item)
+      let date = item.date
+      let list = this.data.roomTypeList
+      let operationList = []
+      for (let i = 0, len = list.length; i < len; i++) {
+        let subList = list[i].roomAmount
+        for (let j = 0, l = subList.length; j < l; j++) {
+          if (item.date === subList[j].date) {
+            operationList.push(subList[j])
+          }
+        }
+      }
+      let all = operationList.every((item) => {
+        return item.status === 1
+      })
+      if (all) {
+        operationList.map((item) => {
+          item.status = 0
+        })
+      } else {
+        operationList.map((item) => {
+          item.status = 1
+        })
+      }
     },
     singleOperation (item, id) {
       /* 单个操作 */
@@ -125,6 +147,7 @@ export default {
       }
     },
     getFestival (date) {
+      /* 获取节日名称 */
       let list = this.festivalList
       date = this.dateFormat(date)
       for (let i = 0, len = list.length; i < len; i++) {
@@ -135,6 +158,7 @@ export default {
       return null
     },
     dateFormat (date, symbol, year) {
+      /* 格式化时间 */
       date = parseFloat(date) ? parseFloat(date) : date
       if (date) {
         symbol = symbol || '-'
