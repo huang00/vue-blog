@@ -80,46 +80,48 @@ export default {
         { date: '1533571200000', name: '国庆' }
       ],
       data: {
-        dateList: [
-          { date: +new Date(), remainRoom: 5 },
-          { date: +new Date()+24*3600000, remainRoom: 6 },
-          { date: +new Date()+24*3600000*2, remainRoom: 10 },
-          { date: +new Date()+24*3600000*3, remainRoom: 7 },
-          { date: +new Date()+24*3600000*4, remainRoom: 5 }
-        ],
+        dateList: [],
         roomTypeList: [
-          { name: '大床房', id: 1, roomAmount: [
-            { date: +new Date(), remainRoom: 5, status: 0 },
-            { date: +new Date()+24*3600000, remainRoom: 3, status: 1 },
-            { date: +new Date()+24*3600000*2, remainRoom: 6, status: 1 },
-            { date: +new Date()+24*3600000*3, remainRoom: 10, status: 1 },
-            { date: +new Date()+24*3600000*4, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*5, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*6, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*7, remainRoom: 20, status: 1 },
-            { date: +new Date()+24*3600000*8, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*9, remainRoom: 10, status: 0 },
-            { date: +new Date()+24*3600000*10, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*11, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*12, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*13, remainRoom: 20, status: 0 }
-          ]},
-          { name: '标准房', id: 2, roomAmount: [
-            { date: +new Date(), remainRoom: 5, status: 0 },
-            { date: +new Date()+24*3600000, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*2, remainRoom: 6, status: 0 },
-            { date: +new Date()+24*3600000*3, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*4, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*5, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*6, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*7, remainRoom: 20, status: 0 },
-            { date: +new Date()+24*3600000*8, remainRoom: 80, status: 0 },
-            { date: +new Date()+24*3600000*9, remainRoom: 20, status: 1 },
-            { date: +new Date()+24*3600000*10, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*11, remainRoom: 10, status: 0 },
-            { date: +new Date()+24*3600000*12, remainRoom: 0, status: 0 },
-            { date: +new Date()+24*3600000*13, remainRoom: 40, status: 0 }
-          ]}
+          {
+            name: '大床房',
+            id: 1,
+            roomAmount: [
+              { date: +new Date(), remainRoom: 5, status: 0 },
+              { date: +new Date() + 24 * 3600000, remainRoom: 3, status: 1 },
+              { date: +new Date() + 24 * 3600000 * 2, remainRoom: 6, status: 1 },
+              { date: +new Date() + 24 * 3600000 * 3, remainRoom: 10, status: 1 },
+              { date: +new Date() + 24 * 3600000 * 4, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 5, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 6, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 7, remainRoom: 20, status: 1 },
+              { date: +new Date() + 24 * 3600000 * 8, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 9, remainRoom: 10, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 10, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 11, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 12, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 13, remainRoom: 20, status: 0 }
+            ]
+          },
+          {
+            name: '标准房',
+            id: 2,
+            roomAmount: [
+              { date: +new Date(), remainRoom: 5, status: 0 },
+              { date: +new Date() + 24 * 3600000, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 2, remainRoom: 6, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 3, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 4, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 5, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 6, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 7, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 8, remainRoom: 80, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 9, remainRoom: 20, status: 1 },
+              { date: +new Date() + 24 * 3600000 * 10, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 11, remainRoom: 10, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 12, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 13, remainRoom: 40, status: 0 }
+            ]
+          }
         ]
       }
     }
@@ -127,7 +129,6 @@ export default {
   methods: {
     batchOperation (item) {
       /* 批量操作 */
-      let date = item.date
       let list = this.data.roomTypeList
       let operationList = []
       for (let i = 0, len = list.length; i < len; i++) {
