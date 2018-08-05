@@ -81,26 +81,44 @@ export default {
       ],
       data: {
         dateList: [
-          { date: 1533398400000, remainRoom: 5 },
-          { date: 1533484800000, remainRoom: 6 },
-          { date: 1533571200000, remainRoom: 10 },
-          { date: 1533744000000, remainRoom: 7 },
-          { date: 1533830400000, remainRoom: 5 }
+          { date: +new Date(), remainRoom: 5 },
+          { date: +new Date()+24*3600000, remainRoom: 6 },
+          { date: +new Date()+24*3600000*2, remainRoom: 10 },
+          { date: +new Date()+24*3600000*3, remainRoom: 7 },
+          { date: +new Date()+24*3600000*4, remainRoom: 5 }
         ],
         roomTypeList: [
           { name: '大床房', id: 1, roomAmount: [
-            { date: 1533398400000, remainRoom: 5, status: 0 },
-            { date: 1533484800000, remainRoom: 3, status: 1 },
-            { date: 1533571200000, remainRoom: 6, status: 1 },
-            { date: 1533744000000, remainRoom: 10, status: 1 },
-            { date: 1533830400000, remainRoom: 20, status: 0 }
+            { date: +new Date(), remainRoom: 5, status: 0 },
+            { date: +new Date()+24*3600000, remainRoom: 3, status: 1 },
+            { date: +new Date()+24*3600000*2, remainRoom: 6, status: 1 },
+            { date: +new Date()+24*3600000*3, remainRoom: 10, status: 1 },
+            { date: +new Date()+24*3600000*4, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*5, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*6, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*7, remainRoom: 20, status: 1 },
+            { date: +new Date()+24*3600000*8, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*9, remainRoom: 10, status: 0 },
+            { date: +new Date()+24*3600000*10, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*11, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*12, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*13, remainRoom: 20, status: 0 }
           ]},
           { name: '标准房', id: 2, roomAmount: [
-            { date: 1533398400000, remainRoom: 5, status: 0 },
-            { date: 1533484800000, remainRoom: 0, status: 0 },
-            { date: 1533571200000, remainRoom: 6, status: 0 },
-            { date: 1533744000000, remainRoom: 0, status: 0 },
-            { date: 1533830400000, remainRoom: 20, status: 0 }
+            { date: +new Date(), remainRoom: 5, status: 0 },
+            { date: +new Date()+24*3600000, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*2, remainRoom: 6, status: 0 },
+            { date: +new Date()+24*3600000*3, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*4, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*5, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*6, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*7, remainRoom: 20, status: 0 },
+            { date: +new Date()+24*3600000*8, remainRoom: 80, status: 0 },
+            { date: +new Date()+24*3600000*9, remainRoom: 20, status: 1 },
+            { date: +new Date()+24*3600000*10, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*11, remainRoom: 10, status: 0 },
+            { date: +new Date()+24*3600000*12, remainRoom: 0, status: 0 },
+            { date: +new Date()+24*3600000*13, remainRoom: 40, status: 0 }
           ]}
         ]
       }
@@ -115,7 +133,7 @@ export default {
       for (let i = 0, len = list.length; i < len; i++) {
         let subList = list[i].roomAmount
         for (let j = 0, l = subList.length; j < l; j++) {
-          if (item.date === subList[j].date) {
+          if (this.dateFormat(item.date) === this.dateFormat(subList[j].date)) {
             operationList.push(subList[j])
           }
         }
@@ -174,7 +192,21 @@ export default {
       date01 = this.dateFormat(date01)
       date02 = this.dateFormat(date02)
       return date01 === date02
+    },
+    getData () {
+      let datelist = []
+      datelist.push({ date: +new Date(), remainRoom: 5 })
+      for (let i = 1; i < 14; i++) {
+        let len = 24 * 3600000 * i
+        datelist.push({
+          date: +new Date() + len, remainRoom: 5
+        })
+      }
+      this.data.dateList = datelist
     }
+  },
+  created () {
+    this.getData()
   }
 }
 </script>
@@ -185,11 +217,10 @@ export default {
   main {
     height: 500px;
     .roomAmount {
-      width: 1035px;
+      width: 1170px;
       margin: 0 auto;
       border-left: 1px solid #E4E4E4;
       border-top: 1px solid #E4E4E4;
-      height: 300px;
       .calendar {
         .head {
           .grid {
