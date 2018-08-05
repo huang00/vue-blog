@@ -6,27 +6,25 @@
         <div class="calendar">
           <div class="head">
             <ul class="clearfix">
-              <li class="grid row0 column0 title">2018-7-16</li>
+              <li class="grid row0 column0 title">{{ dateFormat(today) }}</li>
+              <li :class="['grid', 'row0', 'column' + (index+1)]" v-for="(item, index) in data.dateList" :key="index">
+                <p class="date">{{ dateFormat(item.date, '-', true) }}
+                  <span v-if="isEqual(item.date, today) || getFestival(item.date)" :class="['mark', isEqual(item.date, today)?'today':'festival']" >{{ isEqual(item.date, today)?'今天':getFestival(item.date) }}</span>
+                </p>
+                <p class="week">周{{ getWeek(item.date) }}</p>
+                <p class="week">剩{{ item.remainRoom }}间</p>
+              </li>
+              <!-- <li class="grid row0 column0 title">2018-7-16</li>
               <li class="grid row0 column1">
                 <p class="date">7-16 <span class="mark today">今天</span></p>
                 <p class="week">周{{'三'}}</p>
-                <p class="week">剩{{'4'}}间</p>
-              </li>
-              <li class="grid row0 column2">
-                <p class="date">7-17 </p>
-                <p class="week">周{{'四'}}</p>
-                <p class="week">剩{{'4'}}间</p>
-              </li>
-              <li class="grid row0 column3">
-                <p class="date">7-18 </p>
-                <p class="week">周{{'五'}}</p>
                 <p class="week">剩{{'4'}}间</p>
               </li>
               <li class="grid row0 column4">
                 <p class="date">7-19 <span class="mark festival">中秋</span></p>
                 <p class="week">周{{'六'}}</p>
                 <p class="week">剩{{'4'}}间</p>
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="body">
@@ -87,9 +85,75 @@ export default {
     AppFooter
   },
   data () {
-    return { }
+    return {
+      today: new Date(),
+      festivalList: [
+        { date: 1533830400000, name: '中秋' },
+        { date: 1533571200000, name: '国庆' }
+      ],
+      data: {
+        dateList: [
+          {
+            date: 1533398400000,
+            remainRoom: 5
+          },
+          {
+            date: 1533484800000,
+            remainRoom: 6
+          },
+          {
+            date: 1533571200000,
+            remainRoom: 10
+          },
+          {
+            date: 1533744000000,
+            remainRoom: 7
+          },
+          {
+            date: 1533830400000,
+            remainRoom: 5
+          }
+        ]
+      }
+    }
   },
-  methods: { }
+  methods: {
+    getWeek (date) {
+      date = parseFloat(date)
+      let upperCaseList = ['日', '一', '二', '三', '四', '五', '六']
+      if (date) {
+        date = new Date(date)
+        let week = upperCaseList[date.getDay()]
+        return week
+      }
+    },
+    getFestival (date) {
+      let list = this.festivalList
+      date = this.dateFormat(date)
+      for (let i = 0, len = list.length; i < len; i++) {
+        if (date === this.dateFormat(list[i].date)) {
+          return list[i].name
+        }
+      }
+      return null
+    },
+    dateFormat (date, symbol, year) {
+      if (date) {
+        symbol = symbol || '-'
+        date = new Date(date)
+        if (year) {
+          return `${date.getMonth() + 1}${symbol}${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`
+        }
+        return `${date.getFullYear()}${symbol}${date.getMonth() + 1}${symbol}${date.getDate()}`
+      }
+    },
+    isEqual (date01, date02) {
+      /* 判断两个时间是否相等 */
+      date01 = this.dateFormat(date01)
+      date02 = this.dateFormat(date02)
+      return date01 === date02
+    }
+  }
 }
 </script>
 
@@ -132,7 +196,14 @@ export default {
             .stop { display: none; }
           }
           .grid.haltSales {
-            .stop { display: block; }
+            .stop {
+              display: block;
+              background-color: #0B8CEF;
+              width:73px;
+              height:54px;
+              font-size: 14px;
+              color: #FFFFFF;
+            }
             .num { display: none; }
           }
         }
@@ -152,8 +223,6 @@ export default {
       .clearfix {
         li { float: left; }
       }
-      
-      
     }
   }
 }
