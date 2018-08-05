@@ -7,7 +7,7 @@
           <div class="head">
             <ul class="clearfix">
               <li class="grid row0 column0 title">{{ dateFormat(today) }}</li>
-              <li :class="['grid', 'row0', 'column' + (index+1)]" v-for="(item, index) in data.dateList" :key="index">
+              <li @click="batchOperation(item)" :class="['grid', 'row0', 'column' + (index+1)]" v-for="(item, index) in data.dateList" :key="index">
                 <p class="date">{{ dateFormat(item.date, '-', true) }}
                   <span v-if="isEqual(item.date, today) || getFestival(item.date)" :class="['mark', isEqual(item.date, today)?'today':'festival']" >{{ isEqual(item.date, today)?'今天':getFestival(item.date) }}</span>
                 </p>
@@ -28,9 +28,16 @@
             </ul>
           </div>
           <div class="body">
-            <ul class="clearfix">
+            <ul class="clearfix" v-for="(item, index) in data.roomTypeList" :key="index">
+              <li class="grid row1 column0 title" :class="['grid', 'column0', 'title', 'row' + (index+1)]">{{ item.name }}</li>
+              <li @click="singleOperation(subItem, item.id)" :class="['grid', 'row' + (index+1), 'column' + (key+1), subItem.remainRoom?'':'remainNot']" v-for="(subItem, key) in item.roomAmount" :key="key">
+                <span class="num" v-if="subItem.status === 0">{{ subItem.remainRoom }}</span>
+                <span class="stop" v-if="subItem.status === 1">停售</span>
+              </li>
+            </ul>
+            <!-- <ul class="clearfix">
               <li class="grid row1 column0 title">{{ '大床房' }}</li>
-              <li class="grid row1 column1 haltSales">
+              <li class="grid row1 column1">
                 <span class="num">{{ 5 }}</span>
                 <span class="stop">停止销售</span>
               </li>
@@ -42,30 +49,11 @@
                 <span class="num">{{ 2 }}</span>
                 <span class="stop">停止销售</span>
               </li>
-              <li class="grid row1 column4 haltSales">
+              <li class="grid row1 column4">
                 <span class="num">{{ 5 }}</span>
                 <span class="stop">停止销售</span>
               </li>
-            </ul>
-            <ul class="clearfix">
-              <li class="grid row2 column0 title">{{ '大床房' }}</li>
-              <li class="grid row2 column1">
-                <span class="num">{{ 5 }}</span>
-                <span class="stop">停止销售</span>
-              </li>
-              <li class="grid row2 column2 haltSales">
-                <span class="num">{{ 30 }}</span>
-                <span class="stop">停止销售</span>
-              </li>
-              <li class="grid row2 column3">
-                <span class="num">{{ 2 }}</span>
-                <span class="stop">停止销售</span>
-              </li>
-              <li class="grid row2 column4 remainNot">
-                <span class="num">{{ 0 }}</span>
-                <span class="stop">停止销售</span>
-              </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </div>
@@ -88,38 +76,47 @@ export default {
     return {
       today: new Date(),
       festivalList: [
-        { date: 1533830400000, name: '中秋' },
-        { date: 1533571200000, name: '国庆' }
+        { date: '1533830400000', name: '中秋' },
+        { date: '1533571200000', name: '国庆' }
       ],
       data: {
         dateList: [
-          {
-            date: 1533398400000,
-            remainRoom: 5
-          },
-          {
-            date: 1533484800000,
-            remainRoom: 6
-          },
-          {
-            date: 1533571200000,
-            remainRoom: 10
-          },
-          {
-            date: 1533744000000,
-            remainRoom: 7
-          },
-          {
-            date: 1533830400000,
-            remainRoom: 5
-          }
+          { date: 1533398400000, remainRoom: 5 },
+          { date: 1533484800000, remainRoom: 6 },
+          { date: 1533571200000, remainRoom: 10 },
+          { date: 1533744000000, remainRoom: 7 },
+          { date: 1533830400000, remainRoom: 5 }
+        ],
+        roomTypeList: [
+          { name: '大床房', id: 1, roomAmount: [
+            { date: 1533398400000, remainRoom: 5, status: 0 },
+            { date: 1533484800000, remainRoom: 3, status: 1 },
+            { date: 1533571200000, remainRoom: 6, status: 1 },
+            { date: 1533744000000, remainRoom: 10, status: 1 },
+            { date: 1533830400000, remainRoom: 20, status: 0 }
+          ]},
+          { name: '标准房', id: 2, roomAmount: [
+            { date: 1533398400000, remainRoom: 5, status: 0 },
+            { date: 1533484800000, remainRoom: 0, status: 0 },
+            { date: 1533571200000, remainRoom: 6, status: 0 },
+            { date: 1533744000000, remainRoom: 0, status: 0 },
+            { date: 1533830400000, remainRoom: 20, status: 0 }
+          ]}
         ]
       }
     }
   },
   methods: {
+    batchOperation (item) {
+      /* 批量操作 */
+      console.log('item', item)
+    },
+    singleOperation (item, id) {
+      /* 单个操作 */
+      item.status = item.status === 0 ? 1 : 0
+    },
     getWeek (date) {
-      date = parseFloat(date)
+      date = parseFloat(date) ? parseFloat(date) : date
       let upperCaseList = ['日', '一', '二', '三', '四', '五', '六']
       if (date) {
         date = new Date(date)
@@ -138,6 +135,7 @@ export default {
       return null
     },
     dateFormat (date, symbol, year) {
+      date = parseFloat(date) ? parseFloat(date) : date
       if (date) {
         symbol = symbol || '-'
         date = new Date(date)
@@ -193,9 +191,6 @@ export default {
         }
         .body {
           .grid {
-            .stop { display: none; }
-          }
-          .grid.haltSales {
             .stop {
               display: block;
               background-color: #0B8CEF;
@@ -204,7 +199,6 @@ export default {
               font-size: 14px;
               color: #FFFFFF;
             }
-            .num { display: none; }
           }
         }
         .grid {
