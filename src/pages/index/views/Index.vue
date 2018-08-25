@@ -13,6 +13,7 @@
         :width="600" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
       </app-modal>
       <button @click="modal1 = !modal1">modal1</button>
+      <button @click="sendRequest">sendRequest</button>
     </main>
     <app-footer></app-footer>
   </div>
@@ -22,6 +23,7 @@
 import AppHeader from '@/components/Header'
 import AppFooter from '@/components/Footer'
 import AppModal from '@/components/AppModal'
+import axios from 'axios'
 
 export default {
   name: 'index',
@@ -113,6 +115,13 @@ export default {
     },
     change (val) {
       console.log(val)
+    },
+    sendRequest () {
+      axios.get('/users').then(res => {
+        if (res.data.code === '000000') {
+          console.log('success, ', res.data.content)
+        }
+      })
     }
   },
   mounted () {
