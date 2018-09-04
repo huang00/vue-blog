@@ -19,6 +19,8 @@
         </ul>
       </div>
     </div>
+    <hr style="margin: 20px 0;">
+    <Cascader :data="data4" :load-data="loadData"></Cascader>
   </div>
 </template>
 
@@ -45,10 +47,59 @@ export default {
       model9: 'London',
       value: '3',
       show: false,
-      end: false
+      end: false,
+      data4: [
+        {
+          value: 'beijing',
+          label: '北京',
+          children: [],
+          loading: false
+        },
+        {
+          value: 'hangzhou',
+          label: '杭州',
+          children: [],
+          loading: false
+        }
+      ]
     }
   },
   methods: {
+    loadData (item, callback) {
+      item.loading = true
+      setTimeout(() => {
+        if (item.value === 'beijing') {
+          item.children = [
+            {
+              value: 'talkingdata',
+              label: 'TalkingData'
+            },
+            {
+              value: 'baidu',
+              label: '百度',
+              children: [ ]
+            },
+            {
+              value: 'sina',
+              label: '新浪'
+            }
+          ]
+        } else if (item.value === 'hangzhou') {
+          item.children = [
+            {
+              value: 'ali',
+              label: '阿里巴巴'
+            },
+            {
+              value: '163',
+              label: '网易'
+            }
+          ]
+        }
+        item.loading = false
+        callback()
+      }, 1000)
+    },
     scroll () {
       let scrollGroup = this.$refs.scrollGroup
       let scrollContent = this.$refs.scrollContent

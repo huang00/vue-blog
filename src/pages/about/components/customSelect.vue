@@ -4,7 +4,7 @@
       <input type="hidden" :value="value">
       <div>
         <span class="select-selected-value">{{ label }}</span>
-        <Icon type="chevron-down" class="icon"></Icon>
+        <Icon type="ios-arrow-down" size="18" class="icon"/>
       </div>
     </div>
     <ul class="select-dropdown">
@@ -101,9 +101,9 @@ export default {
       .icon {
         position: absolute;
         right: 5px;
-        top: 11px;
+        top: 8px;
         transition: all .5s;
-        height: 8px;
+        height: 15px;
       }
     }
     .select-dropdown {
