@@ -61,20 +61,27 @@
         <input type="color" v-model="color" style="display: none;" ref="colorPicker">
         <div @click="selectColor" class="showColor" :style="{backgroundColor: color, height: '100%'}"></div>
       </div>
+      <hr style="margin: 20px 0;">
+      <div style="padding-left: 100px;">
+        <app-cascader></app-cascader>
+      </div>
     </main>
     <app-footer></app-footer>
+
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/Header'
 import AppFooter from '@/components/Footer'
+import AppCascader from '../components/app-cascader'
 
 export default {
   name: 'live',
   components: {
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppCascader
   },
   data () {
     return {
