@@ -10,17 +10,9 @@
     <div class="select-dropdown">
       <div class="selected">
         <span class="selected-item item" v-for="(item, index) in selectedData" @click="selectedChangeData(index+1)" :key="item.value">{{item.label}}</span>
-        <!-- <span class="selected-item item">四川省</span>
-        <span class="selected-item item">成都市</span>
-        <span class="selected-item item">青羊区</span> -->
       </div>
       <div class="select">
         <span class="select-item item" v-for="item in dataPool" @click="selectChangeData(item)" :key="item.value">{{item.label}}</span>
-        <!-- <span class="select-item item">四川省</span>
-        <span class="select-item item">北京市</span>
-        <span class="select-item item">福建省</span>
-        <span class="select-item item">江苏省</span>
-        <span class="select-item item">黑龙江省</span> -->
       </div>
     </div>
   </div>
@@ -33,53 +25,13 @@ export default {
     data: {
       type: Array,
       default () {
-        return [{
-          value: 'beijing',
-          label: '北京',
-          children: [
-            {
-              value: 'gugong',
-              label: '故宫'
-            },
-            {
-              value: 'tiantan',
-              label: '天坛'
-            },
-            {
-              value: 'wangfujing',
-              label: '王府井'
-            }
-          ]
-        }, {
-          value: 'jiangsu',
-          label: '江苏',
-          children: [
-            {
-              value: 'nanjing',
-              label: '南京',
-              children: [
-                  {
-                    value: 'fuzimiao',
-                    label: '夫子庙',
-                  }
-              ]
-            },
-            {
-              value: 'suzhou',
-              label: '苏州',
-              children: [
-                {
-                  value: 'zhuozhengyuan',
-                  label: '拙政园',
-                },
-                {
-                  value: 'shizilin',
-                  label: '狮子林',
-                }
-              ]
-            }
-          ]
-        }]
+        return []
+      }
+    },
+    testData: {
+      type: Object,
+      default () {
+        return {}
       }
     }
   },
@@ -93,18 +45,16 @@ export default {
     }
   },
   methods: {
-    selectChangeData (data, isAdd=true) {
+    selectChangeData (data) {
       /* this.value.push(data.value) */
       let len = 0
-      if (isAdd) {
-        len = this.selectedData.length
-        if (this.progress === len) {
-          this.selectedData.splice(len, 1, data)
-        } else {
-          this.selectedData.push(data)
-        }
-        len = this.selectedData.length
+      len = this.selectedData.length
+      if (this.progress === len) {
+        this.selectedData.splice(len, 1, data)
+      } else {
+        this.selectedData.push(data)
       }
+      len = this.selectedData.length
       if (data.children && data.children.length) {
         let list = data.children
         let emptyList = []
@@ -112,18 +62,16 @@ export default {
           emptyList.push(list[i])
         }
         this.dataPool = emptyList
-        if (isAdd) {
-          this.progress = len
-          console.log('progress', this.progress)
-          this.cache[len] = {}
-          this.cache[len][data.value] = emptyList
-        }
+        this.progress = len
+        console.log('progress', this.progress)
+        this.cache[len] = {}
+        this.cache[len][data.value] = emptyList
       } else {
         return false
       }
       console.log(this.cache)
     },
-    selectedChangeData(index) {
+    selectedChangeData (index) {
       let len = this.selectedData.length
       this.progress = index + 1
       if (len - 1 === index) {
@@ -143,7 +91,13 @@ export default {
       handler (value) {
         console.log(value)
       },
-      keep: true
+      deep: true
+    },
+    testData: {
+      handler (value) {
+        console.log('---------', value)
+      },
+      deep: true
     }
   },
   created () {
@@ -154,7 +108,7 @@ export default {
     }
     this.dataPool = emptyList
     this.cache['1'] = emptyList
-    this.cache.length = 1
+    console.log('testData', this.testData)
   }
 }
 </script>

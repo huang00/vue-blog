@@ -63,7 +63,7 @@
       </div>
       <hr style="margin: 20px 0;">
       <div style="padding-left: 100px;">
-        <app-cascader></app-cascader>
+        <app-cascader :test-data="testData"></app-cascader>
       </div>
     </main>
     <app-footer></app-footer>
@@ -133,9 +133,77 @@ export default {
               { date: +new Date() + 24 * 3600000 * 12, remainRoom: 0, status: 0 },
               { date: +new Date() + 24 * 3600000 * 13, remainRoom: 40, status: 0 }
             ]
+          },
+          {
+            name: '双人房',
+            id: 3,
+            roomAmount: [
+              { date: +new Date(), remainRoom: 5, status: 0 },
+              { date: +new Date() + 24 * 3600000, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 2, remainRoom: 6, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 3, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 4, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 5, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 6, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 7, remainRoom: 20, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 8, remainRoom: 80, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 9, remainRoom: 20, status: 1 },
+              { date: +new Date() + 24 * 3600000 * 10, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 11, remainRoom: 10, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 12, remainRoom: 0, status: 0 },
+              { date: +new Date() + 24 * 3600000 * 13, remainRoom: 40, status: 0 }
+            ]
           }
         ]
-      }
+      },
+      cascaderData: [{
+        value: 'beijing',
+        label: '北京',
+        children: [
+          {
+            value: 'gugong',
+            label: '故宫'
+          },
+          {
+            value: 'tiantan',
+            label: '天坛'
+          },
+          {
+            value: 'wangfujing',
+            label: '王府井'
+          }
+        ]
+      }, {
+        value: 'jiangsu',
+        label: '江苏',
+        children: [
+          {
+            value: 'nanjing',
+            label: '南京',
+            children: [
+              {
+                value: 'fuzimiao',
+                label: '夫子庙'
+              }
+            ]
+          },
+          {
+            value: 'suzhou',
+            label: '苏州',
+            children: [
+              {
+                value: 'zhuozhengyuan',
+                label: '拙政园'
+              },
+              {
+                value: 'shizilin',
+                label: '狮子林'
+              }
+            ]
+          }
+        ]
+      }],
+      testData: {}
     }
   },
   methods: {
@@ -225,6 +293,12 @@ export default {
   },
   created () {
     this.getData()
+    setTimeout(() => {
+      this.testData = {
+        '2': [{name: 'xiaohuang', age: 34}],
+        '3': [{name: 'xiaofang', age: 23}]
+      }
+    }, 3000)
   }
 }
 </script>
