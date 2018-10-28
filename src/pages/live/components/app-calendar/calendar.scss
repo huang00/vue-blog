@@ -1,0 +1,60 @@
+.calendar {
+  border-left: 1px solid #E4E4E4;
+  border-top: 1px solid #E4E4E4;
+  width: 1170px;
+  margin: 0 auto;
+  .head {
+    .grid {
+      background-color: #EFEFEF;
+      height: 65px;
+      line-height: 65px;
+      .mark {
+        display: inline-block;
+        width:32px;
+        height:16px;
+        border-radius:8px;
+        font-size: 10px;
+        line-height: 16px;
+        text-align: center;
+        margin-left: 5px;
+        color: white;
+      }
+      p { line-height: 19px; }
+      .mark.today { background-color: #F51C1C; }
+      .mark.festival { background-color: #0366B2; }
+    }
+    .grid:not(.column0) { cursor: pointer; padding-top: 5px; }
+  }
+  .body {
+    .grid {
+      .stop {
+        display: block;
+        background-color: #0B8CEF;
+        width:73px;
+        height:54px;
+        font-size: 14px;
+        color: #FFFFFF;
+      }
+    }
+  }
+  .grid {
+    width: 74px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    border-right: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    cursor: pointer;
+  }
+  .grid.title { width: 133px; cursor: default; }
+  .grid.remainNot { background-color: #F6F6F6; }
+  // .grid:hover:not(.title):not(.row0) { background-color: #F6F6F6; }
+}
+.clearfix {
+  li { float: left; }
+}
+.clearfix:hover {
+  li:not(.title):not(.row0) {
+    background-color: powderblue;
+  }
+}

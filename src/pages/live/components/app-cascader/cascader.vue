@@ -95,7 +95,6 @@ export default {
     },
     testData: {
       handler (value) {
-        console.log('---------', value)
       },
       deep: true
     }
@@ -108,7 +107,6 @@ export default {
     }
     this.dataPool = emptyList
     this.cache['1'] = emptyList
-    console.log('testData', this.testData)
   }
 }
 </script>
