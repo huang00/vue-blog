@@ -190,7 +190,7 @@ export default {
     this.getData()
   },
   mounted () {
-    let calendar = this.$refs.calendar
+    // let calendar = this.$refs.calendar
     this.$nextTick(() => {
       /* let grids = calendar.getElementsByClassName('grid')
       for (let i = 0, len = grids.length; i < len; i++) {

@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <app-header :currLocation="'about'"></app-header>
-    <h1 @click="show = !show">{{ msg }}</h1>
+    <!-- <h1 @click="show = !show">{{ msg }}</h1> -->
     <br style="margin: 20px 0;">
     <div style="display: flex;">
       <custom-select style="margin-left: 50px;" :data="dataList" v-model="value"></custom-select>
@@ -10,7 +10,7 @@
     </div>
     <hr style="margin: 20px 0;">
     <Loading :show="show" :end="end"></Loading>
-    <div class="scrollView">
+    <!-- <div class="scrollView">
       <div class="scrollGroup" ref="scrollGroup">
         <ul ref="scrollContent">
           <li>正在从携程获取信息...</li>
@@ -18,7 +18,7 @@
           <li>正在从艺龙获取信息...</li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <hr style="margin: 20px 0;">
   </div>
 </template>
@@ -45,7 +45,7 @@ export default {
       msg: 'Welcome to about',
       model9: 'London',
       value: '3',
-      show: false,
+      show: true,
       end: false
     }
   },
@@ -80,9 +80,9 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      this.scroll()
-    })
+    // this.$nextTick(() => {
+    //   this.scroll()
+    // })
   }
 }
 </script>
