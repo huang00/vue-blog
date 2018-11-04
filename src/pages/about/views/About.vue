@@ -10,7 +10,7 @@
     </div>
     <hr style="margin: 20px 0;">
     <Loading :show="show" :end="end"></Loading>
-    <!-- <div class="scrollView">
+    <div class="scrollView">
       <div class="scrollGroup" ref="scrollGroup">
         <ul ref="scrollContent">
           <li>正在从携程获取信息...</li>
@@ -18,8 +18,9 @@
           <li>正在从艺龙获取信息...</li>
         </ul>
       </div>
-    </div> -->
+    </div>
     <hr style="margin: 20px 0;">
+    <upload-file></upload-file>
   </div>
 </template>
 
@@ -27,13 +28,15 @@
 import AppHeader from '@/components/Header'
 import customSelect from '../components/customSelect'
 import Loading from '../components/Loading'
+import UploadFile from '../components/UploadFile'
 
 export default {
   name: 'about',
   components: {
     AppHeader,
     customSelect,
-    Loading
+    Loading,
+    UploadFile
   },
   data () {
     return {
@@ -45,7 +48,7 @@ export default {
       msg: 'Welcome to about',
       model9: 'London',
       value: '3',
-      show: true,
+      show: false,
       end: false
     }
   },

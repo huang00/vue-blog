@@ -12,7 +12,7 @@
 export default {
   name: 'loading',
   props: {
-    show: { default: true }
+    show: { default: false }
   },
   data () {
     return {
