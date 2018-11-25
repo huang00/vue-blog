@@ -8,11 +8,13 @@
       </template>
       <DatePicker type="date" ref="datePicker" @on-open-change="open" placeholder="Select date" :options="options" style="width: 200px"></DatePicker>
       <hr style="margin: 20px 0;">
-      <app-modal v-model="modal1"
-        :title="'我是title'"
-        :width="600" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
+      <app-modal v-model="modal1" itle="我是title" :width="'600px'" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
+        <span @click="modal2 = true">点击我弹出里面的弹框</span>
       </app-modal>
-      <button @click="modal1 = !modal1">modal1</button>
+      <app-modal v-model="modal2" :width="'200px'">
+        <h1>哈哈 我是第二个弹窗</h1>
+      </app-modal>
+      <button @click="modal1 = true">modal1</button>
       <button @click="sendRequest">sendRequest</button>
     </main>
     <app-footer></app-footer>
@@ -20,114 +22,118 @@
 </template>
 
 <script>
-import AppHeader from '@/components/Header'
-import AppFooter from '@/components/Footer'
-import AppModal from '@/components/AppModal'
-import axios from 'axios'
+import AppHeader from "@/components/Header";
+import AppFooter from "@/components/Footer";
+import AppModal from "@/components/app-modal";
+import axios from "axios";
 
 export default {
-  name: 'index',
+  name: "index",
   components: {
     AppHeader,
     AppFooter,
     AppModal
   },
-  data () {
-    const vm = this
+  data() {
+    const vm = this;
     return {
       value: [20, 50],
       columns1: [
         {
-          title: 'Name',
-          key: 'name',
-          renderHeader (h) {
+          title: "Name",
+          key: "name",
+          renderHeader(h) {
             return h({
-              template: '<Select v-model="model1" @on-change="handlerChange" style="width:100px">' +
-                        '<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>' +
-                        '</Select>',
-              data () {
+              template:
+                '<Select v-model="model1" @on-change="handlerChange" style="width:100px">' +
+                '<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>' +
+                "</Select>",
+              data() {
                 return {
                   cityList: [
                     {
-                      value: 'New York',
-                      label: 'New York'
+                      value: "New York",
+                      label: "New York"
                     },
                     {
-                      value: 'London',
-                      label: 'London'
+                      value: "London",
+                      label: "London"
                     }
                   ],
-                  model1: ''
-                }
+                  model1: ""
+                };
               },
               methods: {
-                handlerChange (value) {
-                  vm.parentHandlerChange(value)
+                handlerChange(value) {
+                  vm.parentHandlerChange(value);
                 }
               }
-            })
+            });
           }
         },
         {
-          title: 'Age',
-          key: 'age'
+          title: "Age",
+          key: "age"
         },
         {
-          title: 'Address',
-          key: 'address'
+          title: "Address",
+          key: "address"
         }
       ],
       data1: [],
       options: {
-        disabledDate (data) {},
-        shortcuts: [{
-          text: '记住',
-          value (data) {
-            return new Date('2018-07-29')
+        disabledDate(data) {},
+        shortcuts: [
+          {
+            text: "记住",
+            value(data) {
+              return new Date("2018-07-29");
+            }
+            // onClick () {
+            //   console.log('click')
+            // }
           }
-          // onClick () {
-          //   console.log('click')
-          // }
-        }]
+        ]
       },
-      modal1: false
-    }
+      modal1: false,
+      modal2: false
+    };
   },
   methods: {
-    parentHandlerChange (value) {
-      console.log('value, ', value)
+    parentHandlerChange(value) {
+      console.log("value, ", value);
     },
-    open (boo) {
-      console.log(this.$refs.datePicker)
+    open(boo) {
+      console.log(this.$refs.datePicker);
     },
-    emptyTable () {
+    emptyTable() {
       this.$nextTick(() => {
-        let table = document.getElementById('tableEmpty')
-        let tableDody = table.getElementsByClassName('ivu-table-tip')[0]
-        tableDody.innerHTML = `<div class="empty"></div>`
-      })
+        let table = document.getElementById("tableEmpty");
+        let tableDody = table.getElementsByClassName("ivu-table-tip")[0];
+        tableDody.innerHTML = `<div class="empty"></div>`;
+      });
     },
-    ok () {
-      console.log('你点击了确认')
+    ok() {
+      console.log("你点击了确认");
     },
-    cancel () {
-      console.log('你点击了取消')
+    cancel() {
+      console.log("你点击了取消");
     },
-    change (val) {
-      console.log(val)
+    change(val) {
+      console.log(val);
     },
-    sendRequest () {
-      axios.get('/users').then(res => {
-        if (res.data.code === '000000') {
-          console.log('success, ', res.data.content)
+    sendRequest() {
+      axios.get("/users").then(res => {
+        if (res.data.code === "000000") {
+          console.log("success, ", res.data.content);
         }
-      })
+      });
     }
   },
-  mounted () {
-    this.emptyTable()
+  mounted() {
+    this.emptyTable();
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
