@@ -1,6 +1,19 @@
 <template>
   <div class="index">
     <app-header :currLocation="'index'"></app-header>
+    <div
+      style="
+        height: 500px;
+        border: 1px solid red;
+      "
+    >
+      <div style="position: relative; border: 1px solid blue; width: 300px; margin-left: 200px;">
+        <tabs-nav
+          :list="list"
+        >
+        </tabs-nav>
+      </div>
+    </div>
     <div class="banner"></div>
     <main>
       <template>
@@ -26,13 +39,15 @@ import AppHeader from "@/components/Header";
 import AppFooter from "@/components/Footer";
 import AppModal from "@/components/app-modal";
 import axios from "axios";
+import TabsNav from '../components/TabsNav'
 
 export default {
   name: "index",
   components: {
     AppHeader,
     AppFooter,
-    AppModal
+    AppModal,
+    TabsNav
   },
   data() {
     const vm = this;
@@ -96,7 +111,8 @@ export default {
         ]
       },
       modal1: false,
-      modal2: false
+      modal2: false,
+      list: ['1', '2', '3', '4', '5', '6']
     };
   },
   methods: {
