@@ -7,9 +7,10 @@
         border: 1px solid red;
       "
     >
-      <div style="position: relative; border: 1px solid blue; width: 300px; margin-left: 200px;">
+      <div style="position: relative; width: 300px; margin-left: 200px;">
         <tabs-nav
           :list="list"
+          @on-switch="onSwitch"
         >
         </tabs-nav>
       </div>
@@ -112,12 +113,22 @@ export default {
       },
       modal1: false,
       modal2: false,
-      list: ['1', '2', '3', '4', '5', '6']
+      list: [
+        {value: 1, label: '神奇大床房'},
+        {value: 2, label: '丽江背包十年'},
+        {value: 3, label: '圣境成都门店'},
+        {value: 4, label: '圣境丽江门店'},
+        {value: 5, label: '圣境云南门店'},
+        {value: 6, label: '圣境成都- 福年广场分店'},
+      ]
     };
   },
   methods: {
     parentHandlerChange(value) {
       console.log("value, ", value);
+    },
+    onSwitch (item) {
+      console.log('item', item)
     },
     open(boo) {
       console.log(this.$refs.datePicker);
