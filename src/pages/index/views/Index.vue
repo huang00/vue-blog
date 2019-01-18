@@ -1,31 +1,48 @@
 <template>
   <div class="index">
     <app-header :currLocation="'index'"></app-header>
-    <div
-      style="
+    <div style="
         height: 500px;
         border: 1px solid red;
-      "
-    >
-      <div style="position: relative; width: 300px; margin-left: 200px;">
-        <tabs-nav
-          :list="list"
-          @on-switch="onSwitch"
-        >
-        </tabs-nav>
+      ">
+      <div style="position: relative; width: 300px; height: 440px;border: 1px solid blue; margin-left: 200px;">
+        <select-authority></select-authority>
       </div>
     </div>
     <div class="banner"></div>
     <main>
       <template>
-        <Table ref="tableEmpty" id="tableEmpty" :columns="columns1" :data="data1" no-data-text="暂时无数据"></Table>
+        <Table
+          ref="tableEmpty"
+          id="tableEmpty"
+          :columns="columns1"
+          :data="data1"
+          no-data-text="暂时无数据"
+        ></Table>
       </template>
-      <DatePicker type="date" ref="datePicker" @on-open-change="open" placeholder="Select date" :options="options" style="width: 200px"></DatePicker>
+      <DatePicker
+        type="date"
+        ref="datePicker"
+        @on-open-change="open"
+        placeholder="Select date"
+        :options="options"
+        style="width: 200px"
+      ></DatePicker>
       <hr style="margin: 20px 0;">
-      <app-modal v-model="modal1" itle="我是title" :width="'600px'" @on-ok="ok" @on-cancel="cancel" @on-visible-change="change">
+      <app-modal
+        v-model="modal1"
+        itle="我是title"
+        :width="'600px'"
+        @on-ok="ok"
+        @on-cancel="cancel"
+        @on-visible-change="change"
+      >
         <span @click="modal2 = true">点击我弹出里面的弹框</span>
       </app-modal>
-      <app-modal v-model="modal2" :width="'200px'">
+      <app-modal
+        v-model="modal2"
+        :width="'200px'"
+      >
         <h1>哈哈 我是第二个弹窗</h1>
       </app-modal>
       <button @click="modal1 = true">modal1</button>
@@ -40,7 +57,7 @@ import AppHeader from "@/components/Header";
 import AppFooter from "@/components/Footer";
 import AppModal from "@/components/app-modal";
 import axios from "axios";
-import TabsNav from '../components/TabsNav'
+import SelectAuthority from "../components/SelectAuthority";
 
 export default {
   name: "index",
@@ -48,7 +65,7 @@ export default {
     AppHeader,
     AppFooter,
     AppModal,
-    TabsNav
+    SelectAuthority
   },
   data() {
     const vm = this;
@@ -112,23 +129,15 @@ export default {
         ]
       },
       modal1: false,
-      modal2: false,
-      list: [
-        {value: 1, label: '神奇大床房'},
-        {value: 2, label: '丽江背包十年'},
-        {value: 3, label: '圣境成都门店'},
-        {value: 4, label: '圣境丽江门店'},
-        {value: 5, label: '圣境云南门店'},
-        {value: 6, label: '圣境成都- 福年广场分店'},
-      ]
+      modal2: false
     };
   },
   methods: {
     parentHandlerChange(value) {
       console.log("value, ", value);
     },
-    onSwitch (item) {
-      console.log('item', item)
+    onSwitch(item) {
+      console.log("item", item);
     },
     open(boo) {
       console.log(this.$refs.datePicker);
