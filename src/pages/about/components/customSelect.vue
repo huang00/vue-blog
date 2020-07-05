@@ -65,9 +65,9 @@ export default {
     open (val) {
       let that = this
       if (val) {
-        document.addEventListener('click', that.eventHandler)
+        document.addEventListener('mouseup', that.eventHandler)
       } else {
-        document.removeEventListener('click', that.eventHandler)
+        document.removeEventListener('mouseup', that.eventHandler)
       }
     }
   },
